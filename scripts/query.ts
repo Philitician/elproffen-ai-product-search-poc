@@ -1,7 +1,7 @@
 import { generateEmbedding } from "~/inngest/product-embeddings-sync/generate-embedding";
 import { queryProducts } from "~/lib/queries";
 
-const INPUT = "Jeg trenger en koblings klemme";
+const INPUT = "Jeg trenger stripps som tåler kulde";
 
 const main = async () => {
   const beforeEmbedding = performance.now();

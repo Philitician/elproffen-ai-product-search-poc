@@ -14,7 +14,7 @@ export const queryProducts = async (embeddedQuery: number[]) => {
       similarity,
     })
     .from(productEmbedding)
-    .where(gt(similarity, 0.5))
+    .where(gt(similarity, 0.4))
     .orderBy((t) => desc(t.similarity))
     .limit(4);
 };
