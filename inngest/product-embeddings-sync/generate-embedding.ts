@@ -4,7 +4,7 @@ import { embed, embedMany } from "ai";
 export const generateEmbedding = async (value: string): Promise<number[]> => {
   const { embedding } = await embed({
     model: openai.embedding("text-embedding-3-small"),
-    value: value.replaceAll("\n", " "),
+    value,
   });
   return embedding;
 };
