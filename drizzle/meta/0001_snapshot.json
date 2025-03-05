@@ -1,0 +1,105 @@
+{
+  "id": "c5880f73-f8a9-4d74-9c4e-b6f540ba9d29",
+  "prevId": "4740d306-5240-455c-bdfa-09b43a15151f",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.ProductEmbedding": {
+      "name": "ProductEmbedding",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "byDefault",
+            "name": "ProductEmbedding_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "product_id": {
+          "name": "product_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "product_number": {
+          "name": "product_number",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "content": {
+          "name": "content",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "embedding": {
+          "name": "embedding",
+          "type": "vector(1536)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "ProductEmbedding_embedding_index": {
+          "name": "ProductEmbedding_embedding_index",
+          "columns": [
+            {
+              "expression": "embedding",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last",
+              "opclass": "vector_cosine_ops"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "hnsw",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "ProductEmbedding_product_id_unique": {
+          "name": "ProductEmbedding_product_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "product_id"
+          ]
+        },
+        "ProductEmbedding_product_number_unique": {
+          "name": "ProductEmbedding_product_number_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "product_number"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

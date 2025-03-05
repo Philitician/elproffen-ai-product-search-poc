@@ -8,6 +8,13 @@
       "when": 1732737550483,
       "tag": "0000_giant_sumo",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1738498551178,
+      "tag": "0001_sudden_menace",
+      "breakpoints": true
     }
   ]
 }

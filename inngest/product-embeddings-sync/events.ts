@@ -12,15 +12,13 @@ export const syncProductEmbeddingsMultiple = inngest.createFunction(
   { id: "sync-product-embeddings-multiple" },
   { event: "product/embeddings.sync.multiple" },
   async ({ event, step }) => {
-    const { productNumbers } = syncProductEmbeddingsMultipleSchema.parse(
-      event.data
-    );
+    const { products } = syncProductEmbeddingsMultipleSchema.parse(event.data);
 
     await step.sendEvent(
       "sync-product-embeddings",
-      productNumbers.map((productNumber) => ({
+      products.map((data) => ({
         name: "product/embeddings.sync",
-        data: { productNumber },
+        data,
       }))
     );
   }
@@ -30,7 +28,9 @@ export const syncProductEmbeddings = inngest.createFunction(
   { id: "sync-product-embeddings" },
   { event: "product/embeddings.sync" },
   async ({ event, step }) => {
-    const { productNumber } = syncProductEmbeddingsSchema.parse(event.data);
+    const { productId, productNumber } = syncProductEmbeddingsSchema.parse(
+      event.data
+    );
 
     // 1. retrieve up to date product data and create a comprehensive product text
     const productText = await step.run("Get product text", async () => {
@@ -45,7 +45,12 @@ export const syncProductEmbeddings = inngest.createFunction(
       // TODO: a. generate embeddings
       const embedding = await generateEmbedding(productText);
       // TODO: b. upsert embeddings to Neon with pgvector
-      await upsertEmbedding({ productNumber, productText, embedding });
+      await upsertEmbedding({
+        productId,
+        productNumber,
+        productText,
+        embedding,
+      });
     });
   }
 );

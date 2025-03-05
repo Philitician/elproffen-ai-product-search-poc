@@ -1,13 +1,19 @@
 import { Inngest, EventSchemas } from "inngest";
-import { z } from "zod";
-
-export const syncProductEmbeddingsMultipleSchema = z.object({
-  productNumbers: z.array(z.string()),
-});
+import { unknown, z } from "zod";
 
 export const syncProductEmbeddingsSchema = z.object({
+  productId: z.number(),
   productNumber: z.string(),
 });
+
+export const syncProductEmbeddingsMultipleSchema = z.object({
+  products: z.array(syncProductEmbeddingsSchema),
+});
+
+// export const tempTableInsertedSchema = z.object({
+//   data: z.unknown(),
+// });
+export const tempTableInsertedSchema = z.object({});
 
 // Create a client to send and receive events
 export const inngest = new Inngest({
@@ -18,5 +24,6 @@ export const inngest = new Inngest({
       data: syncProductEmbeddingsMultipleSchema,
     },
     "product/embeddings.sync": { data: syncProductEmbeddingsSchema },
+    "db/temp_table.inserted": { data: tempTableInsertedSchema },
   }),
 });

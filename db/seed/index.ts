@@ -1,6 +1,6 @@
 import { PromisePool } from "@supercharge/promise-pool";
 import { getEfoProductData } from "~/inngest/product-embeddings-sync/get-efo-product-data";
-import { PRODUCT_NUMBERS_TOP_10 } from "./data";
+import { PRODUCTS_TOP_10 } from "./data";
 
 import fs from "fs/promises";
 import path from "path";
@@ -20,8 +20,8 @@ const storeToJsonFile = async (data: any, filename: string) => {
 };
 
 const seed = async () => {
-  await PromisePool.for(PRODUCT_NUMBERS_TOP_10).process(
-    async (productNumber) => {
+  await PromisePool.for(PRODUCTS_TOP_10).process(
+    async ({ id, productNumber }) => {
       const productData = await getEfoProductData(productNumber);
       await storeToJsonFile(
         productData,
@@ -32,7 +32,12 @@ const seed = async () => {
       console.log("produced text", productNumber);
       const embedding = await generateEmbedding(productText);
       console.log("produced embedding", productNumber);
-      await upsertEmbedding({ productNumber, productText, embedding });
+      await upsertEmbedding({
+        productId: Number(id),
+        productNumber,
+        productText,
+        embedding,
+      });
       console.log("upserted embedding", productNumber);
     }
   );
