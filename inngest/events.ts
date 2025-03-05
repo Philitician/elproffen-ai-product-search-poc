@@ -2,7 +2,7 @@ import { inngest, tempTableInsertedSchema } from "./client";
 
 export const tempTableInserted = inngest.createFunction(
   { id: "temp-table-inserted" },
-  { event: "neondb/temp_table.inserted" },
+  { event: "db/temp_table.inserted" },
   async ({ event, step }) => {
     const { data } = event;
 
@@ -17,7 +17,7 @@ export const tempTableInserted = inngest.createFunction(
 
 export const tempTableUpdated = inngest.createFunction(
   { id: "temp-table-updated" },
-  { event: "neondb/temp_table.updated" },
+  { event: "db/temp_table.updated" },
   async ({ event, step }) => {
     const { data } = event;
 
@@ -32,7 +32,7 @@ export const tempTableUpdated = inngest.createFunction(
 
 export const tempTableDeleted = inngest.createFunction(
   { id: "temp-table-deleted" },
-  { event: "neondb/temp_table.deleted" },
+  { event: "db/temp_table.deleted" },
   async ({ event, step }) => {
     const { data } = event;
 
@@ -47,7 +47,7 @@ export const tempTableDeleted = inngest.createFunction(
 
 export const usersInserted = inngest.createFunction(
   { id: "users-inserted" },
-  { event: "neondb/users.inserted" },
+  { event: "db/users.inserted" },
   async ({ event, step }) => {
     const { data } = event;
 
@@ -62,7 +62,7 @@ export const usersInserted = inngest.createFunction(
 
 export const usersUpdated = inngest.createFunction(
   { id: "users-updated" },
-  { event: "neondb/users.updated" },
+  { event: "db/users.updated" },
   async ({ event, step }) => {
     const { data } = event;
 
@@ -77,7 +77,7 @@ export const usersUpdated = inngest.createFunction(
 
 export const usersDeleted = inngest.createFunction(
   { id: "users-deleted" },
-  { event: "neondb/users.deleted" },
+  { event: "db/users.deleted" },
   async ({ event, step }) => {
     const { data } = event;
 
