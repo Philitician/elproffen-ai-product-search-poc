@@ -6,6 +6,9 @@ import {
   tempTableInserted,
   tempTableUpdated,
   tempTableDeleted,
+  usersDeleted,
+  usersUpdated,
+  usersInserted,
 } from "~/inngest/events";
 // Create an API that serves zero functions
 export const { GET, POST, PUT } = serve({
@@ -16,5 +19,8 @@ export const { GET, POST, PUT } = serve({
     tempTableInserted,
     tempTableUpdated,
     tempTableDeleted,
+    usersInserted,
+    usersUpdated,
+    usersDeleted,
   ],
 });

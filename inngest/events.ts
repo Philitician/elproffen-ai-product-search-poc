@@ -44,3 +44,48 @@ export const tempTableDeleted = inngest.createFunction(
     };
   }
 );
+
+export const usersInserted = inngest.createFunction(
+  { id: "users-inserted" },
+  { event: "db/users.inserted" },
+  async ({ event, step }) => {
+    const { data } = event;
+
+    console.log("data", data);
+
+    return {
+      message: "Users inserted",
+      data,
+    };
+  }
+);
+
+export const usersUpdated = inngest.createFunction(
+  { id: "users-updated" },
+  { event: "db/users.updated" },
+  async ({ event, step }) => {
+    const { data } = event;
+
+    console.log("data", data);
+
+    return {
+      message: "Users updated",
+      data,
+    };
+  }
+);
+
+export const usersDeleted = inngest.createFunction(
+  { id: "users-deleted" },
+  { event: "db/users.deleted" },
+  async ({ event, step }) => {
+    const { data } = event;
+
+    console.log("data", data);
+
+    return {
+      message: "Users deleted",
+      data,
+    };
+  }
+);

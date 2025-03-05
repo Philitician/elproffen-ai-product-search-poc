@@ -19,6 +19,12 @@ export const tempTableUpdatedSchema = z.object({});
 
 export const tempTableDeletedSchema = z.object({});
 
+export const usersInsertedSchema = z.object({});
+
+export const usersUpdatedSchema = z.object({});
+
+export const usersDeletedSchema = z.object({});
+
 // Create a client to send and receive events
 export const inngest = new Inngest({
   id: "embeddings-sync-app",
@@ -31,5 +37,8 @@ export const inngest = new Inngest({
     "db/temp_table.inserted": { data: tempTableInsertedSchema },
     "db/temp_table.updated": { data: tempTableUpdatedSchema },
     "db/temp_table.deleted": { data: tempTableDeletedSchema },
+    "db/users.inserted": { data: usersInsertedSchema },
+    "db/users.updated": { data: usersUpdatedSchema },
+    "db/users.deleted": { data: usersDeletedSchema },
   }),
 });
