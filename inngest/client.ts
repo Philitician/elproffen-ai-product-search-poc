@@ -15,6 +15,10 @@ export const syncProductEmbeddingsMultipleSchema = z.object({
 // });
 export const tempTableInsertedSchema = z.object({});
 
+export const tempTableUpdatedSchema = z.object({});
+
+export const tempTableDeletedSchema = z.object({});
+
 // Create a client to send and receive events
 export const inngest = new Inngest({
   id: "embeddings-sync-app",
@@ -25,5 +29,7 @@ export const inngest = new Inngest({
     },
     "product/embeddings.sync": { data: syncProductEmbeddingsSchema },
     "db/temp_table.inserted": { data: tempTableInsertedSchema },
+    "db/temp_table.updated": { data: tempTableUpdatedSchema },
+    "db/temp_table.deleted": { data: tempTableDeletedSchema },
   }),
 });
